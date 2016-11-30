@@ -10,9 +10,14 @@ import UIKit
 
 class DreamListerTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var imgItem: UIImageView!
+    @IBOutlet weak var lblNameItem: UILabel!
+    @IBOutlet weak var lblPriceItem: UILabel!
+    @IBOutlet weak var lblDetailItem: UILabel!
+    
+    func configureCell(item: Item){
+        lblNameItem.text = item.title
+        lblPriceItem.text = "$\(item.price)"
+        lblDetailItem.text = item.details
     }
-
 }
