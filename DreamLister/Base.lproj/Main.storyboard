@@ -33,6 +33,9 @@
                                     <segment title="Title"/>
                                 </segments>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="segmentChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="71r-IK-fhj"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BtZ-83-VDr">
                                 <rect key="frame" x="16" y="132" width="288" height="436"/>
@@ -177,6 +180,9 @@
                                     <constraint firstAttribute="height" constant="100" id="HHx-P6-Yda"/>
                                     <constraint firstAttribute="width" constant="100" id="InV-fb-TGF"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="addImage:" destination="U2k-NO-Vis" eventType="touchUpInside" id="Su1-uQ-ZML"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewF-fj-C6J" customClass="CustomTextField" customModule="DreamLister" customModuleProvider="target">
                                 <rect key="frame" x="124" y="72" width="180" height="40"/>
@@ -224,6 +230,9 @@
                                 <state key="normal" title="Save Item">
                                     <color key="titleColor" red="0.90611000539999997" green="0.90611000539999997" blue="0.90611000539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveItemAction:" destination="U2k-NO-Vis" eventType="touchUpInside" id="lTH-9P-kzG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otp-Gs-0ij">
                                 <rect key="frame" x="115" y="298" width="91" height="23.5"/>
@@ -264,8 +273,18 @@
                     <navigationItem key="navigationItem" title="Add/Edit" id="f7J-KM-7Vh">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="OJU-8x-4Fc">
                             <color key="tintColor" red="0.93725490199999995" green="0.2901960784" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="U2k-NO-Vis" id="Bcd-In-nBV"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="storePicker" destination="NuW-rY-eat" id="sUO-5R-qho"/>
+                        <outlet property="thumbImg" destination="8v5-uq-G2u" id="TVe-QH-oA5"/>
+                        <outlet property="txtDetails" destination="KvW-GO-b1g" id="Pcy-gq-OHk"/>
+                        <outlet property="txtPrice" destination="QL7-tq-qob" id="daA-OH-ded"/>
+                        <outlet property="txtTitle" destination="ewF-fj-C6J" id="pBm-XS-zO5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TZ-74-pPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -276,7 +295,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K0X-Xw-PS2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LJD-Zy-ZjD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LJD-Zy-ZjD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

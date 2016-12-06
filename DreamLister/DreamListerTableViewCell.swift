@@ -19,5 +19,6 @@ class DreamListerTableViewCell: UITableViewCell {
         lblNameItem.text = item.title
         lblPriceItem.text = "$\(item.price)"
         lblDetailItem.text = item.details
+        imgItem.image = item.toimage?.image as? UIImage
     }
 }

@@ -59,16 +59,48 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let objs = fecthedResultsController.fetchedObjects , objs.count > 0 {
+            
+            let item = objs[indexPath.row]
+            performSegue(withIdentifier: "detailItemSegue", sender: item)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailItemSegue" {
+            if let destination = segue.destination as? ItemDetailsViewController {
+                if let item = sender as? Item {
+                    destination.itemToEdit = item
+                }
+            }
+        }
+    }
 
     func attemptFetch(){
-        let fecthRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
+        let priceSort = NSSortDescriptor(key: "price", ascending: true)
+        let titleSort = NSSortDescriptor(key: "title", ascending: true)
         
-        fecthRequest.sortDescriptors = [dateSort]
+        if segment.selectedSegmentIndex == 0 {
+            
+            fetchRequest.sortDescriptors = [dateSort]
+            
+        } else if segment.selectedSegmentIndex == 1 {
+            
+            fetchRequest.sortDescriptors = [priceSort]
+            
+        } else if segment.selectedSegmentIndex == 2 {
+            
+            fetchRequest.sortDescriptors = [titleSort]
+        }
         
-        fecthedResultsController = NSFetchedResultsController(fetchRequest: fecthRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fecthedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
+        fecthedResultsController.delegate = self
         
         do {
             
@@ -79,6 +111,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("\(error)")
         }
         
+    }
+    
+    @IBAction func segmentChange(_ sender: AnyObject) {
+        attemptFetch()
+        tableView.reloadData()
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
